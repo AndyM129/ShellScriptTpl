@@ -101,10 +101,10 @@ sh script_tpl.sh push origin master
 ### Example 4：全能的混合风格
 
 ```shell
-sh script_tpl.sh -v command p1 p2 p3 p4,p5,p6 "p7 p8 p9" --option1 -subOption1 -subOption2 --option2 aaa -subOption1 bbb --option3 "ccc" -subOption1 "ddd" -subOption2 eee "fff ggg"# sh template_2.sh -v command p1 p2 p3 p4,p5,p6 "p7 p8 p9" --option1 -subOption1 -subOption2 --option2 aaa -subOption1 bbb --option3 "ccc" -subOption1 "ddd" -subOption2 eee "fff ggg"
+sh script_tpl.sh -v command p1 p2 p3 p4,p5,p6 "p7 p8 p9" --option1 -subOption1 -subOption2 --option2 aaa -subOption1 bbb --option3 "ccc" -subOption1 "ddd" -subOption2 eee "fff ggg"
 ```
 
-![image-20210402181514897](https://raw.githubusercontent.com/AndyM129/ImageHosting/master/images/20210402183724.png)
+![image-20210402184929124](https://raw.githubusercontent.com/AndyM129/ImageHosting/master/images/20210402184930.png)
 
 ### Example ∞：其他
 

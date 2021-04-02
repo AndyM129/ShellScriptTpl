@@ -146,6 +146,7 @@ main() {
                     shift
                     currentSubOptionValue=$([[ -z $currentSubOptionValue  ]] && echo "$1" || echo "$currentSubOptionValue $1")
                 done
+                if [[ -z $currentSubOptionValue ]]; then currentSubOptionValue="1"; fi
                 echoDebug "\$$currentSubOptionKey=$currentSubOptionValue"
                 eval ${currentSubOptionKey}='$currentSubOptionValue'
                 shift $([[ -z $2 || ${2:0:1} == "-" ]] && echo 0 || echo 1);;
