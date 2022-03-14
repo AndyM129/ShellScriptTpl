@@ -1,40 +1,43 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # =========================================== COPYRIGHT ===========================================
 readonly SCRIPT_NAME="script_tpl.sh" # 脚本名称
 readonly SCRIPT_DESC="Shell 脚本模板，已预制常用常量、变量、方法定义，及复杂参数解析，以便快速开始核心编程。" # 脚本名称
-readonly SCRIPT_VERSION="1.1.0" # 脚本版本
+readonly SCRIPT_VERSION="1.2.0" # 脚本版本
 readonly SCRIPT_UPDATETIME="2021/04/01" # 最近的更新时间
 readonly AUTHER_NAME="MengXinxin" # 作者
 readonly AUTHER_EMAIL="andy_m129@163.com" # 作者邮箱
 readonly REAMDME_URL="https://github.com/AndyM129/ShellScriptTpl" # 说明文档
-readonly SCRIPT_UPDATE_LOG=''' 
-\n### 2021/03/31: v1.0.0 
-\n
-\n* 立项，参考 `xcodebuild` 命令，实现基于参数键值对方式的参数处理，如：
-\n
-\n  ```shell
-\n  sh template.sh --command1 -option11 aaa -option12 bbb --command2 -option21 ccc -option22 ddd eee fff ggg
-\n  ```
-\n
-\n### 2021/04/01: v1.1.0
-\n
-\n* 参考 `pod` 命令，扩展实现 支持命令、选项、参数，或同时输入的参数处理，如：
-\n
-\n  ```shell
-\n  sh template_2.sh -d command p1 p2 p3 p4,p5,p6 "p7 p8 p9" --option1 -subOption1 -subOption2 --option2 aaa -subOption1 bbb --option3 "ccc" -subOption1 "ddd" -subOption2 eee "fff ggg"
-\n  ```
-\n
+readonly SCRIPT_UPDATE_LOG='''
+### 2022/03/14: v1.2.0
+
+* 清除所有警告
+
+### 2021/04/01: v1.1.0
+
+* 参考 `pod` 命令，扩展实现 支持命令、选项、参数，或同时输入的参数处理，如：
+
+  ```shell
+  sh template_2.sh -d command p1 p2 p3 p4,p5,p6 "p7 p8 p9" --option1 -subOption1 -subOption2 --option2 aaa -subOption1 bbb --option3 "ccc" -subOption1 "ddd" -subOption2 eee "fff ggg"
+  ```
+
+### 2021/03/31: v1.0.0
+
+* 立项，参考 `xcodebuild` 命令，实现基于参数键值对方式的参数处理，如：
+
+  ```shell
+  sh template.sh --command1 -option11 aaa -option12 bbb --command2 -option21 ccc -option22 ddd eee fff ggg
+  ```
 '''
 
 # =========================================== GLOBAL CONST ===========================================
 readonly MACOS_VER="$(/usr/bin/sw_vers -productVersion)" # 当前 MacOS 版本，eg. 11.0.1
 readonly TIMESTAMP=$(date +%s) # 当前时间戳，eg. 1617351251
-readonly DATE=$(date -r $TIMESTAMP "+%Y-%m-%d %H:%M:%S") # 当前时间，eg. 2021-04-02 16:14:11
-readonly DATE_STAMP=$(date -r $TIMESTAMP "+%Y%m%d%H%M%S") # 当前时间戳，eg. 20210402161411
+readonly DATE=$(date -r "$TIMESTAMP" "+%Y-%m-%d %H:%M:%S") # 当前时间，eg. 2021-04-02 16:14:11
+readonly DATE_STAMP=$(date -r "$TIMESTAMP" "+%Y%m%d%H%M%S") # 当前时间戳，eg. 20210402161411
 readonly CURRENT_PATH=$(pwd); # 当前所在路径
-readonly SCRIPT_DIRPATH=$(dirname $0); # 当前脚本的文件路径
-readonly SCRIPT_BASENAME=$(basename $0); # 当前脚本的文件名
+readonly SCRIPT_DIRPATH=$(dirname "$0"); # 当前脚本的文件路径
+readonly SCRIPT_BASENAME=$(basename "$0"); # 当前脚本的文件名
 readonly SCRIPT_BASENAME_WITHOUT_SUFFIX=${SCRIPT_BASENAME%.*} # 文件名（不含后缀）
 readonly SCRIPT_BASENAME_SUFFIX=${SCRIPT_BASENAME##*.} # 文件后缀
 
@@ -84,7 +87,7 @@ help() {
 # =========================================== PROCESS ===========================================
 
 process() {
-    echoSuccess "收到参数 $#个：$@"
+    echoSuccess "process() 收到参数 $#个：$@"
     echoSuccess
     echoSuccess "Done !"
     exit 0;
@@ -102,7 +105,7 @@ main() {
                 ?) help; exit 1 ;;
             esac
         done
-        shift $[$OPTIND-1]
+        shift $((OPTIND-1))
     fi
 
     echoDebug; 
@@ -178,8 +181,8 @@ main() {
 
     # 预制处理
     if [ $help ]; then help; exit 0; fi;
-    if [ $version ]; then echoInfo $SCRIPT_VERSION; exit 0; fi;
-    if [ $updatelog ]; then echoInfo $SCRIPT_UPDATE_LOG; exit 0; fi;
+    if [ $version ]; then echoInfo "$SCRIPT_VERSION"; exit 0; fi;
+    if [ $updatelog ]; then echoInfo "$SCRIPT_UPDATE_LOG"; exit 0; fi;
 
     # 开始处理
     process ${commandParams[@]}
